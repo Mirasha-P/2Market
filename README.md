@@ -1,102 +1,70 @@
-**1.0 INTRODUCTION**
+# SuperMarket Data Analysis
 
-2Market aims to optimize marketing strategies and product offerings by analysing customer demographics and purchasing behaviours. This initiative is driven by the desire to enhance customer satisfaction and profitability through data-driven insights into the effectiveness of various marketing channels and the popularity of products across different customer segments. 
+## Project Overview
+This project involves a comprehensive analysis of customer demographics and purchasing behaviors for 2Market, aiming to optimize marketing strategies and product offerings. The analysis spans data validation, Excel analysis, SQL querying, and data visualization using Tableau.
 
-**2.0 ANALYTICAL APPROACH**
+## Data Source
+The analysis uses datasets containing information about customer demographics, purchasing behavior, and marketing channel effectiveness.
 
-The basis of my data analysis was a series of questions designed to identify the complex nature of consumer behaviour, the impact of marketing efforts and popular products across diverse demographic segments.
-Informed assumptions were made throughout the project.
+## Analytical Approach
 
-**2.1 Assumptions**
+### Data Validation and Cleaning (Excel)
+- Checked for duplicate IDs and null values
+- Standardized marital status categories and country names
+- Corrected formatting issues in income and date fields
+- Added an age column based on birth year
+- Handled outliers in the age data
 
-- Maximum Age of humans considered as 100 years.
+### Customer Demographics Analysis (Excel)
+- Created pivot tables to compare average ages across marital status
+- Used AVERAGEIFS function to calculate average ages within income bands
 
-- Marital Status “YOLO” and “ALONE” considered as single, “'Together' and 'Absurd' to 'Married’.
+### Advanced Analysis (SQL)
+1. **Customer Purchase Behaviour**
+   - Analyzed total product spending by country, product, and marital status
+   - Examined spending patterns for households with kids and teens
 
-**2.2 Data Validation**
+2. **Most Popular Products Analysis**
+   - Ranked product popularity by expenditure within demographic segments
+   - Identified universally popular products like 'Liquor'
 
-- Unique Identifiers: Used Excel's conditional formatting to detect duplicate IDs, to ensure each there are no duplicates. Used as the primary key in SQL.
+3. **Advertising Channel Effectiveness**
+   - Evaluated marketing channel conversions by country, marital status, and age group
+   - Used JOIN operations and subqueries for comprehensive analysis
 
-- Null Values: Checked for blanks using CTRL+G. None found.
+### Dashboard Design (Tableau)
+- Created a comprehensive dashboard visualizing key insights from the analysis
 
-- Marital Status: Merged similar marital statuses for uniform categorization using FIND&REPLACE.
+## Key Findings
+- Older customers tend to have higher incomes, suggesting potential for targeted luxury product marketing
+- Widowed customers have the highest average age (64), while singles are youngest on average
+- Most customers do not have kids or teens at home, influencing product interests
+- Liquor is the most popular product across most customer demographics
+- Advertising channel effectiveness varies by country and demographic, with Instagram leading globally
 
-- Incorrect Formatting: Change text-based income entries into numeric values using number formatting and date was in text format hence change to date format using TEXT and TEXTSPLIT.
+## Recommendations
+- Improve data collection methods for better data integrity (e.g., dropdown menus for Year of Birth and Marital Status)
+- Explore product-specific marketing strategies, particularly for high-earning age groups
+- Refine customer engagement techniques across different advertising platforms
+- Analyze underperformance in certain regions or demographic groups for growth opportunities
 
-- Country Name Standardization: Ensured consistency in country names to maintain geographical integrity for the analysis, using FIND&REPLACE.
+## Files in the Repository
+- `ERD.png`: Entity-Relationship Diagram
+- `2M_SQL Code.sql`: SQL queries for advanced analysis
+- `2M_Dashboard.twbx`: Tableau workbook with the final dashboard
+- `Technical Report.pdf`: Detailed report of the analysis and findings
 
-- Age Column: A new column added to show the age of the customers using (YEAR (NOW ()) formula.
+## How to Use
+- Review the data cleaning process in the Excel file
+- Examine the supermarket_erd.png to understand the database structure
+- Run the SQL queries in your preferred database system
+- Open the Tableau workbook to interact with the dashboard
+- Read the detailed report for comprehensive insights and recommendations
 
-- Outliers – Age IQR was -18 where lower and upper bound was 73 and -45.5 respectively. However according to assumptions made ID 11004, 1150 & 7829 was disregarded from the analysis.
+## Future Work
+- Conduct time series analysis on purchasing trends
+- Implement machine learning models for customer segmentation and product recommendation
+- Integrate real-time data for dynamic analysis and decision-making
 
-**2.3 Customer Demographics Analysis with Excel**
-
-- Pivot Tables: Created to compare average ages across marital status, revealing behavioural trends.
-
-- AVERAGEIFS Function: Calculated average ages within income bands to study the financial influence on consumer behaviour.
-
-**2.4 Further analysis in SQL**
-
-I deepened my analysis of customer purchases and marketing efficacy through SQL, constructing a database as depicted in the ERD. Tables were formed using CREATE TABLE scripts, with carefully chosen column names and data constraints to maintain data quality.
-
-**2.4.1 Customer Purchase Behaviour**
-
-I utilized aggregation functions like SUM() and arithmetic operations to calculate total product spending, creating aliases for clarity. GROUP BY and ORDER BY helped isolate data.
-By Country: Aggregated spending across products to identify target markets for focused strategies.
-
-![image](https://github.com/user-attachments/assets/1f38773b-e3cd-40e0-946c-758aecb12ab7)
-![image](https://github.com/user-attachments/assets/72c39724-9f32-475e-8a4e-7238682572fc)
-
-By Product and Country: Segmented by product to highlight how much each country spent on different products and inform supply chain decisions.
-
-By Product and Marital Status: Analysed to tailor marketing strategies to marital segments.
-
-With Kids and Teens at Home: Examined to understand how family dynamics' influence on spending.
-
-
-**2.4.2 Most Popular Products Analysis**
-
-Combined Aggregate functions (SUM & GREATEST) with CASE statement followed by WHEN and THEN clauses to rank product popularity by expenditure within demographic segments.
-
-Marital Status: Identified 'Liquor' as universally popular, suggesting its strategic importance.
-
-![image](https://github.com/user-attachments/assets/7ed5718d-91c7-46a2-b333-9d9c66a25453)
-
-Country , Kids or Teenagers: Assessed to provide insights into regional and household-based purchasing trends.
-
-**2.4.3 Advertising Channel Effectiveness**
-
-Inner Join used to combine marketing_data and ad_data tables also used SUM to aggregate marketing channel conversions. Effectiveness also calculated as a percentage to total lead conversions to get a clearer picture.
-
-By Country: Evaluated social media conversions against total conversions to determine effective platforms.
-
-![image](https://github.com/user-attachments/assets/0b3ac295-ed74-4a06-8d8a-ea7dd45e75f9)
-![image](https://github.com/user-attachments/assets/a497d86a-0ff1-4574-81e3-94b5e2fbae22)
-
-By Marital Status: Aggregated conversions by status to pinpoint resonant advertising channels.
-
-By Age Group: Categorized customers via subqueries and ranked advertising effectiveness by age segment using WHEN clause. Subquery was simplified using a WITH clause.
-
-**3.0 DASHBOARD DESIGN AND DEVELOPMENT**
-
-Using Tableau below Dashboard was created.
-
-![image](https://github.com/user-attachments/assets/b1055e1d-e351-4f81-b0b4-684e4ff4a00e)
-
-
-**4.0 PATTERNS, TRENDS, AND INSIGHTS**
-- Older customers tend to have higher incomes, suggesting a targeted approach for luxury or premium product marketing.
-- Widowed customers have the highest average age at 64, while singles are the youngest on average. Marketing strategies could be customized to cater to the specific lifestyle needs of these groups.
-- Most customers do not have kids or teens at home, which may influence the types of products they are interested in or the time they have available for shopping.
-- Liquor stands out as the most popular product across most customer demographics, indicating its potential as a key product for promotions and special offers.
-- Advertising channel effectiveness varies by country and demographic, with Instagram leading in conversions globally but other channels like Twitter and Bulk mail performing best in specific regions or demographics.
-
-**5.0 RECOMMENDATION**
-
-Data source improvement: For better data integrity, use dropdown menus for Year of Birth and Marital Status, and pre-set ranges for Income, to standardize inputs and streamline data inputs.
-
-**6.0 CONCLUSION**
-
-To optimize 2Market's strategies, further exploration is recommended in the areas of product-specific marketing, particularly for high-earning age groups, and in refining customer engagement techniques across varying advertising platforms. Analysing the underperformance in certain regions or demographic groups could also unlock potential growth opportunities.
-
-> This Analysis was conducted as a part of LSE Data Analytics Career Acclerator Programme.
+## Contact
+For any questions or feedback, please reach out.
